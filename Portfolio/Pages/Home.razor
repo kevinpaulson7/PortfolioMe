@@ -10,7 +10,7 @@
             <span class="text-blue-500 bg-clip-text">C# / .NET & Python</span>
         </h1>
         <p class="text-lg md:text-xl text-slate-400 mb-10 leading-relaxed max-w-3xl mx-auto">
-            I am a Software Developer with experience building enterprise business applications using C#, .NET, and SQL Server. I specialize in WPF/WinForms consoles, REST API integration, workflow automation, and building robust backend scheduling systems.
+            Software Developer with 6+ months of experience developing enterprise business applications using C#, .NET and SQL Server. Built WPF/WinForms configuration and scheduling consoles for restaurant operations platforms, with hands-on REST API integration, workflow automation, scheduler jobs, and end-to-end debugging across application, API and database layers.
         </p>
         <div class="flex gap-4 justify-center">
             <a href="#experience" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-lg font-medium transition-all shadow-lg shadow-blue-500/30">
@@ -23,6 +23,29 @@
     </div>
 </section>
 
+<!-- Skills Section -->
+<section id="skills" class="py-20 px-4">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-white mb-12" data-aos="fade-up">Technical Skills</h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+            @foreach (var skill in skills)
+            {
+                <div data-aos="fade-up" class="group bg-slate-800/80 rounded-xl p-6 border border-slate-700 transition-all duration-300 hover:-translate-y-2 hover:border-blue-400 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] flex flex-col items-center text-center">
+
+                    <!-- Icon Container -->
+                    <div class="w-16 h-16 mb-4 flex items-center justify-center p-2 bg-slate-200/10 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                        <img src="@skill.IconPath" alt="@skill.Name logo" class="max-w-full max-h-full object-contain drop-shadow-md" />
+                    </div>
+
+                    <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors mb-2">@skill.Name</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">@skill.Description</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
 <!-- Experience Section (New) -->
 <section id="experience" class="py-20 px-4 bg-slate-800/30 border-y border-slate-800">
     <div class="max-w-7xl mx-auto">
@@ -30,10 +53,11 @@
 
         <!-- Horizontal Grid layout for cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            @foreach (var exp in experiences)
+            @for (int i = 0; i < experiences.Count; i++)
             {
-                <!-- Card with live glowing hover effect -->
-                <div data-aos="fade-up" class="group bg-slate-800/80 rounded-xl p-6 border border-slate-700 transition-all duration-300 hover:-translate-y-2 hover:border-blue-400 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] hover:bg-slate-800 flex flex-col">
+                var exp = experiences[i];
+                <!-- Changed to fade-right and added data-aos-delay -->
+                <div data-aos="fade-right" data-aos-delay="@(i * 250)" class="group bg-slate-800/80 rounded-xl p-6 border border-slate-700 transition-all duration-300 hover:-translate-y-2 hover:border-blue-400 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] hover:bg-slate-800 flex flex-col">
 
                     <div class="flex items-center gap-4 mb-6 border-b border-slate-700 pb-4">
                         <!-- Logo Placeholder -->
@@ -100,14 +124,66 @@
     </div>
 </section>
 
+<!-- Resume Section -->
+<section id="resume" class="py-24 px-4 bg-slate-900 border-t border-slate-800">
+    <div class="max-w-4xl mx-auto text-center" data-aos="zoom-in">
+        <div class="w-20 h-20 mx-auto bg-slate-800 rounded-full flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(59,130,246,0.2)]">
+            <i class="fas fa-file-pdf text-3xl text-blue-500"></i>
+        </div>
+        <h2 class="text-3xl font-bold text-white mb-4">View My Full Background</h2>
+        <p class="text-slate-400 mb-10 leading-relaxed">
+            Interested in my detailed work history, education, and certifications? Download my complete resume below.
+        </p>
+        <a href="Kevin_Resume.pdf" download="Kevin_Paulson_Resume.pdf" class="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-lg font-bold transition-all shadow-lg shadow-blue-500/30 group">
+            <i class="fas fa-download group-hover:-translate-y-1 transition-transform"></i>
+            Download Resume
+        </a>
+    </div>
+</section>
+
 @code {
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
+            await Task.Delay(100);
             await JS.InvokeVoidAsync("initAOS");
         }
     }
+
+    private List<Skill> skills = new()
+    {
+        new Skill(
+            "C#",
+            "Object-oriented programming for robust backend services and desktop applications.",
+            "image/csharp.png" // Update to match your actual filename
+        ),
+        new Skill(
+            "ASP.NET",
+            "Building high-throughput REST APIs and enterprise web applications.",
+            "image/dotnet.png"
+        ),
+        new Skill(
+            "SQL Server",
+            "Database design, stored procedures, data validation, and SSMS management.",
+            "image/sql.png"
+        ),
+        new Skill(
+            "Python",
+            "Full-stack development, scripting, and machine learning pipelines (YOLOv8).",
+            "image/python.png"
+        ),
+        new Skill(
+            "Flutter",
+            "Cross-platform mobile application development with Dart and Material 3.",
+            "image/flutter.png"
+        ),
+        new Skill(
+            "Git",
+            "Version control, GitHub collaboration, and source code management.",
+            "image/git.png"
+        )
+    };
 
     private List<Experience> experiences = new()
     {
@@ -115,7 +191,7 @@
             "Zigbill Software Solutions",
             "Software Developer",
             "Mar 2026 - Oct 2026",
-            "image/zigbill-logo.png", // Update with your actual logo path
+            "image/zigjo_logo.png", // Update with your actual logo path
             new[]
             {
                 "Developed configuration and scheduling consoles in WinForms and WPF for enterprise restaurant platforms.",
@@ -127,7 +203,7 @@
             "Techolas Technologies",
             "Python Full Stack Trainee",
             "Jul 2025 - Feb 2026",
-            "image/techolas-logo.png", // Update with your actual logo path
+            "image/Techolas_logo.png", // Update with your actual logo path
             new[]
             {
                 "Completed comprehensive Python Full Stack Development program.",
@@ -139,7 +215,7 @@
             "Techgentsia Software",
             "Software Development Intern",
             "Jan 2025 - Apr 2025",
-            "image/techgentsia-logo.png", // Update with your actual logo path
+            "image/techgentsia_logo.png", // Update with your actual logo path
             new[]
             {
                 "Trained a custom YOLOv8 model for number plate detection.",

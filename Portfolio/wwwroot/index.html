@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,10 +31,18 @@
     </div>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-                window.initAOS = () => { AOS.init({ duration: 800, once: true }); }
+                        window.initAOS = () => {
+                            AOS.init({
+                                duration: 800,
+                                once: false,
+                                offset: 100 // Triggers slightly earlier when scrolling
+                            });
+
+                            // Force AOS to recalculate the positions of the Blazor elements
+                            setTimeout(() => { AOS.refresh(); }, 200);
+                        }
     </script>
     <script src="_framework/blazor.webassembly.js"></script>
-</body>
 </body>
 
 </html>
