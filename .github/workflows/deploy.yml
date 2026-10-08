@@ -17,7 +17,8 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '10.0.x' # Change to '9.0.x' if your project targets .NET 9
+        dotnet-version: '10.0.x'
+        dotnet-quality: 'preview' # Change to '9.0.x' if your project targets .NET 9
 
     - name: Publish Blazor App
       run: dotnet publish Portfolio/Portfolio.csproj -c Release -o release
@@ -32,3 +33,4 @@ jobs:
       with:
         branch: gh-pages
         folder: release/wwwroot
+        dotfiles: true
