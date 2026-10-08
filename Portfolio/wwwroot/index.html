@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kevin Paulson | Software Engineer</title>
-    <base href="/" />
+    <base href="/PortfolioMe/" />
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- AOS Animations -->
@@ -29,18 +29,29 @@
         <a href="." class="reload">Reload</a>
         <span class="dismiss">🗙</span>
     </div>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-                        window.initAOS = () => {
-                            AOS.init({
-                                duration: 800,
-                                once: false,
-                                offset: 100 // Triggers slightly earlier when scrolling
-                            });
+                                window.initAOS = () => {
+                                    AOS.init({
+                                        duration: 800,
+                                        once: false,
+                                        offset: 100 // Triggers slightly earlier when scrolling
+                                    });
 
-                            // Force AOS to recalculate the positions of the Blazor elements
-                            setTimeout(() => { AOS.refresh(); }, 200);
-                        }
+                                    // Force AOS to recalculate the positions of the Blazor elements
+                                    setTimeout(() => { AOS.refresh(); }, 200);
+                                }
+                            window.initTyped = () => {
+                                new Typed('#typed-greeting', {
+                                    strings: ['Heyy', 'Hey', 'He', 'H', 'He', 'Hey', 'Heyy'], // Types, backspaces, types again
+                                    typeSpeed: 200,
+                                    backSpeed: 200,
+                                    backDelay: 150,
+                                    loop: true,
+                                    cursorChar: '|'
+                                });
+                            };
     </script>
     <script src="_framework/blazor.webassembly.js"></script>
 </body>

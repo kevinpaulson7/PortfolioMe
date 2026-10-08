@@ -21,3 +21,11 @@ public record Experience(
     string LogoPath,
     string[] Highlights
 );
+
+public record Education(
+    string Institution,
+    string Course,
+    string Batch,
+    string Score,
+    string LogoPath
+);

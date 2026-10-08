@@ -2,44 +2,152 @@
 @using Portfolio.Models
 @inject IJSRuntime JS
 
-<!-- Hero Section (Photo Removed, Centered) -->
-<section id="home" class="min-h-[70vh] flex flex-col justify-center items-center pt-20 px-4 text-center">
-    <div class="max-w-4xl mx-auto" data-aos="fade-up">
-        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
-            Software Developer <br />
-            <span class="text-blue-500 bg-clip-text">C# / .NET & Python</span>
-        </h1>
-        <p class="text-lg md:text-xl text-slate-400 mb-10 leading-relaxed max-w-3xl mx-auto">
-            Software Developer with 6+ months of experience developing enterprise business applications using C#, .NET and SQL Server. Built WPF/WinForms configuration and scheduling consoles for restaurant operations platforms, with hands-on REST API integration, workflow automation, scheduler jobs, and end-to-end debugging across application, API and database layers.
-        </p>
-        <div class="flex gap-4 justify-center">
-            <a href="#experience" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-lg font-medium transition-all shadow-lg shadow-blue-500/30">
-                View Experience
-            </a>
-            <a href="#projects" class="border border-slate-600 hover:border-slate-400 text-white px-8 py-3 rounded-lg font-medium transition-all">
-                View Projects
-            </a>
+<style>
+    /* Blinking Cursor Animation */
+    .typing-cursor::after {
+        content: '|';
+        animation: blink 1s step-start infinite;
+        color: #3b82f6; /* Tailwind blue-500 */
+    }
+
+    @@keyframes blink {
+        50% { opacity: 0; }
+    }
+
+    /* Waving Hand Animation */
+    .wave-animation {
+        display: inline-block;
+        transform-origin: 70% 70%;
+        animation: wave 2.5s infinite;
+    }
+
+    @@keyframes wave {
+        0% { transform: rotate(0deg); }
+        10% { transform: rotate(14deg); }
+        20% { transform: rotate(-8deg); }
+        30% { transform: rotate(14deg); }
+        40% { transform: rotate(-4deg); }
+        50% { transform: rotate(10deg); }
+        60% { transform: rotate(0deg); }
+        100% { transform: rotate(0deg); }
+    }
+</style>
+
+<!-- Hero Section (Two-Column Layout) -->
+<section id="home" class="min-h-[75vh] flex items-center pt-20 px-4">
+    <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
+
+        <!-- Left Column: Text Content -->
+        <div data-aos="fade-right">
+            <!-- Typing Animation Container -->
+            <h2 class="text-3xl md:text-4xl font-mono text-blue-500 mb-2 h-10">
+                <span id="typed-greeting"></span>
+            </h2>
+
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                I'm Kevin
+            </h1>
+
+            <p class="text-lg text-slate-400 mb-8 leading-relaxed max-w-lg">
+                Software Developer with 6+ months of experience developing enterprise business applications using C#, .NET and SQL Server. Built WPF/WinForms configuration and scheduling consoles for restaurant operations platforms, with hands-on REST API integration, workflow automation, scheduler jobs, and end-to-end debugging across application, API and database layers.
+            </p>
+
+            <div class="flex gap-4">
+                <a href="#experience" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg font-medium transition-all shadow-lg shadow-blue-500/30">
+                    View Experience
+                </a>
+                <a href="#projects" class="border border-slate-600 hover:border-slate-400 text-white px-6 py-3 rounded-lg font-medium transition-all">
+                    View Projects
+                </a>
+            </div>
+        </div>
+
+        <!-- Right Column: Avatar and Waving Hand -->
+        <div data-aos="fade-left" class="flex flex-col items-center justify-center">
+
+            <!-- Avatar Image Container -->
+            <div class="relative">
+                <!-- Live vector avatar matching the flat-design style -->
+                <!-- Right Column: Avatar -->
+                <img src="image/avatar.svg" alt="Developer Avatar" class="w-64 h-64 md:w-80 md:h-80 object-contain drop-shadow-2xl" />
+                <!-- Waving Hand Emoji Positioned over the Avatar -->
+                <div class="absolute top-0 right-0 text-5xl md:text-6xl wave-animation bg-slate-800/80 backdrop-blur-md rounded-full p-3 border border-slate-600 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                    👋
+                </div>
+            </div>
+
+            <!-- Location and Time -->
+            <div class="mt-8 text-xs font-mono text-slate-500 tracking-widest uppercase text-center">
+                KL, IND • IST @DateTime.Now.ToString("hh:mm tt")
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Skills Section (Compact Cluster) -->
+<section id="skills" class="py-20 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-white mb-10" data-aos="fade-up">Technical Skills</h2>
+
+        <!-- Flexbox center clustering -->
+        <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+            @for (int i = 0; i < skills.Count; i++)
+            {
+                var skill = skills[i];
+                <div data-aos="zoom-in" data-aos-delay="@(i * 100)" class="group flex items-center gap-3 bg-slate-800/80 px-5 py-3 rounded-full border border-slate-700 transition-all duration-300 hover:-translate-y-1 hover:border-blue-400 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+
+                    <!-- Smaller Icon -->
+                    <div class="w-6 h-6 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <img src="@skill.IconPath" alt="@skill.Name" class="max-w-full max-h-full object-contain" />
+                    </div>
+
+                    <span class="text-white font-semibold text-sm group-hover:text-blue-400 transition-colors">@skill.Name</span>
+                </div>
+            }
         </div>
     </div>
 </section>
 
-<!-- Skills Section -->
-<section id="skills" class="py-20 px-4">
-    <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold text-center text-white mb-12" data-aos="fade-up">Technical Skills</h2>
+<!-- Education Section -->
+<!-- Education Section (Minimalist Layout) -->
+<section id="education" class="py-20 px-4 bg-slate-800/30 border-y border-slate-800">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-white mb-16" data-aos="fade-up">Education Background</h2>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-            @foreach (var skill in skills)
+        <div class="space-y-10">
+            @for (int i = 0; i < educations.Count; i++)
             {
-                <div data-aos="fade-up" class="group bg-slate-800/80 rounded-xl p-6 border border-slate-700 transition-all duration-300 hover:-translate-y-2 hover:border-blue-400 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] flex flex-col items-center text-center">
+                var edu = educations[i];
+                <div data-aos="fade-right" data-aos-delay="@(i * 150)" class="flex flex-col md:flex-row items-start gap-6 group">
 
-                    <!-- Icon Container -->
-                    <div class="w-16 h-16 mb-4 flex items-center justify-center p-2 bg-slate-200/10 rounded-lg group-hover:scale-110 transition-transform duration-300">
-                        <img src="@skill.IconPath" alt="@skill.Name logo" class="max-w-full max-h-full object-contain drop-shadow-md" />
+                    <!-- Logo (Turns from grayscale to color on hover) -->
+                    <div class="w-20 h-20 bg-slate-200 rounded-lg p-2 flex-shrink-0 flex items-center justify-center shadow-md transition-transform duration-300 group-hover:scale-105">
+                        <img src="@edu.LogoPath" alt="@edu.Institution Logo" class="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300" />
                     </div>
 
-                    <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors mb-2">@skill.Name</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">@skill.Description</p>
+                    <!-- Details Container with subtle bottom divider -->
+                    <div class="flex-grow pb-10 border-b border-slate-700/50 group-last:border-none group-last:pb-0">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
+
+                            <!-- Left Side: Institution & Course -->
+                            <div>
+                                <h3 class="text-xl font-bold text-white transition-colors group-hover:text-blue-400">@edu.Institution</h3>
+                                <p class="text-slate-300 text-md mt-1">@edu.Course</p>
+                            </div>
+
+                            <!-- Right Side: Batch & Score -->
+                            <div class="text-left md:text-right flex flex-col md:items-end gap-2">
+                                <span class="inline-flex items-center text-slate-400 text-sm bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700">
+                                    <i class="far fa-calendar-alt mr-2"></i> @edu.Batch
+                                </span>
+                                <span class="inline-flex items-center text-teal-400 font-semibold text-sm">
+                                    <i class="fas fa-graduation-cap mr-2"></i> @edu.Score
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             }
         </div>
@@ -86,38 +194,30 @@
     </div>
 </section>
 
-<!-- Projects Section -->
+<!-- Projects Section (Text Only) -->
 <section id="projects" class="py-20 px-4">
     <div class="max-w-7xl mx-auto">
         <h2 class="text-3xl font-bold text-center text-white mb-12" data-aos="fade-up">Featured Projects</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             @foreach (var project in projects)
             {
-                <!-- Applied similar glowing hover effect to project cards -->
-                <div data-aos="fade-up" class="bg-slate-800/80 rounded-xl overflow-hidden border border-slate-700 transition-all duration-300 hover:-translate-y-2 hover:border-blue-400 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] flex flex-col">
-                    <div class="relative pt-[70%]">
-                        <video controls class="absolute top-0 left-0 w-full h-full object-cover bg-black">
-                            <source src="@project.VideoPath" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold text-white mb-2">@project.Title</h3>
-                        <p class="text-slate-400 text-sm mb-4 flex-grow">@project.Description</p>
+                <div data-aos="fade-up" class="bg-slate-800/80 rounded-xl p-6 border border-slate-700 transition-all duration-300 hover:-translate-y-2 hover:border-blue-400 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)] flex flex-col">
+                    <h3 class="text-xl font-bold text-white mb-3">@project.Title</h3>
+                    <p class="text-slate-400 text-sm mb-6 flex-grow">@project.Description</p>
 
-                        <div class="flex flex-wrap gap-2 mb-6 mt-auto">
-                            @foreach (var tech in project.TechStack)
-                            {
-                                <span class="bg-slate-700/50 text-blue-300 text-xs px-2 py-1 rounded border border-slate-600">@tech</span>
-                            }
-                        </div>
-
-                        @if (!string.IsNullOrEmpty(project.GithubUrl))
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        @foreach (var tech in project.TechStack)
                         {
-                            <a href="@project.GithubUrl" target="_blank" class="block w-full text-center border border-slate-600 hover:border-blue-400 hover:text-blue-400 text-white px-4 py-2 rounded transition-colors">
-                                <i class="fab fa-github mr-2"></i> View Code
-                            </a>
+                            <span class="bg-slate-700/50 text-blue-300 text-xs px-2 py-1 rounded border border-slate-600">@tech</span>
                         }
                     </div>
+
+                    @if (!string.IsNullOrEmpty(project.GithubUrl))
+                    {
+                        <a href="@project.GithubUrl" target="_blank" class="block w-full text-center border border-slate-600 hover:border-blue-400 hover:text-blue-400 text-white px-4 py-2 rounded transition-colors">
+                            <i class="fab fa-github mr-2"></i> View Code
+                        </a>
+                    }
                 </div>
             }
         </div>
@@ -141,6 +241,21 @@
     </div>
 </section>
 
+<!-- Contact Section -->
+<section id="contact" class="py-24 px-4 border-t border-slate-800 bg-slate-900/50">
+    <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
+        <h2 class="text-3xl font-bold text-white mb-6">Get In Touch</h2>
+        <p class="text-slate-400 mb-10 leading-relaxed">
+            I'm currently looking for new opportunities as a Software Developer. Whether you have a question or just want to say hi, my inbox is always open!
+        </p>
+
+        <a href="mailto:kevinpaulson245@gmail.com" class="inline-flex items-center gap-3 bg-transparent border-2 border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white px-8 py-4 rounded-lg font-bold transition-all shadow-[0_0_20px_rgba(59,130,246,0.1)] hover:shadow-[0_0_30px_rgba(59,130,246,0.4)]">
+            <i class="fas fa-envelope text-xl"></i>
+            kevinpaulson245@gmail.com
+        </a>
+    </div>
+</section>
+
 @code {
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -148,6 +263,7 @@
         {
             await Task.Delay(100);
             await JS.InvokeVoidAsync("initAOS");
+            await JS.InvokeVoidAsync("initTyped");
         }
     }
 
@@ -182,6 +298,24 @@
             "Git",
             "Version control, GitHub collaboration, and source code management.",
             "image/git.png"
+        )
+    };
+
+    private List<Education> educations = new()
+    {
+        new Education(
+            "APJ Abdul Kalam University",
+            "B.Tech in Computer Science",
+            "2021 - 2025",
+            "CGPA: 7.65",
+            "images/ktu-logo.png" // Save your university logo here
+        ),
+        new Education(
+            "Your School Name", // <-- Edit this
+            "Higher Secondary Education", // <-- Edit this
+            "2019 - 2021", // <-- Edit this
+            "Score: __%", // <-- Edit this
+            "images/school-logo.png" // Save your school logo here
         )
     };
 

@@ -1,5 +1,19 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0f172a;
+    /* Subtle industrial-cyber blueprint background */
+    background-image: radial-gradient(circle, rgba(15, 23, 42, 0.5) 20%, #020617 100%), url('../image/tech-bg.png');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #e2e8f0;
+}
+/* Ensure sections are transparent so the background shows through */
+section {
+    background: transparent !important;
 }
 
 h1:focus {
